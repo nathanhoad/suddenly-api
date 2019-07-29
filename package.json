@@ -1,6 +1,6 @@
 {
   "name": "@suddenly/api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A helper for making API calls",
   "main": "dist/index.js",
   "scripts": {
