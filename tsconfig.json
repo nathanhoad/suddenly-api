@@ -1,0 +1,9 @@
+{
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "declaration": true,
+    "lib": ["es2015", "dom"]
+  }
+}
