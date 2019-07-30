@@ -90,13 +90,7 @@ export default class API {
   private request(method: string, path: string, options: FetchOptions = {}): Promise<any> {
     const url = path.indexOf('http') > -1 ? path : this.URL + path;
 
-    options = merge(
-      {
-        method: method,
-        headers: { authorization: this.getSessionToken() }
-      },
-      options
-    );
+    options = merge({ method: method }, options);
 
     // Set up basic headers
     options.headers = merge(
@@ -106,6 +100,11 @@ export default class API {
       },
       options.headers
     );
+
+    // Only attach auth if we are signed in
+    if (this.getSessionToken()) {
+      options.headers.authorization = this.getSessionToken();
+    }
 
     // Attach the payload
     if (options.payload) {
