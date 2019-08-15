@@ -116,7 +116,7 @@ export default class API {
     return fetch(url, options)
       .then((r: any) => {
         status = r.status;
-        r.json();
+        return r.json();
       })
       .then((response: any) => {
         if (response == null) return Promise.resolve(response);
