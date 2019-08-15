@@ -10,7 +10,7 @@ export interface FetchOptions {
 }
 
 export class APIError extends Error {
-  statusCode: number;
+  status: number;
   data: any;
 }
 
@@ -111,8 +111,13 @@ export default class API {
       options.body = JSON.stringify(options.payload);
     }
 
+    let status = 200;
+
     return fetch(url, options)
-      .then((r: any) => r.json())
+      .then((r: any) => {
+        status = r.status;
+        r.json();
+      })
       .then((response: any) => {
         if (response == null) return Promise.resolve(response);
 
@@ -125,9 +130,10 @@ export default class API {
           this.setSession(null);
         }
 
-        if (response.statusCode && response.statusCode !== 200) {
+        status = response.status || status;
+        if (status < 200 || status >= 400) {
           var error = new APIError(response.message ? response.message : response.error);
-          error.statusCode = response.statusCode;
+          error.status = status;
           if (response.data) {
             error.data = response.data;
           }
