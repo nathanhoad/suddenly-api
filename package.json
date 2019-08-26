@@ -4,7 +4,8 @@
   "description": "A helper for making API calls",
   "main": "dist/index.js",
   "scripts": {
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,20 @@
     "object-assign": "^4.1.1"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": ".*\\.test\\.(ts|tsx)$"
   }
 }

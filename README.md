@@ -5,7 +5,7 @@ A helper for making API calls.
 ## Usage
 
 ```js
-import API from '@suddenly/api';
+import API, { queryString } from '@suddenly/api';
 
 const api = new API('app-name', '/api');
 
@@ -13,6 +13,11 @@ api.setSessionToken('SOME SIGNED JWT TOKEN TO AUTH WITH YOUR SERVER');
 
 api.get('/things').then(things => {
   console.log(things);
+});
+
+// /things?search=something
+api.get('/things' + queryString({ search: 'Something' })).then(things => {
+  console.log('things that match Something:', things);
 });
 
 api.post('/things', { name: 'New Thing' }).then(thing => {
